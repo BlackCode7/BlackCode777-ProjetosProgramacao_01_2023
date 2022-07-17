@@ -27,10 +27,8 @@ public class ProdutoControllers {
 	public Page<Produto> findProdutos(
 			@RequestParam(value = "minDate", defaultValue = "") String minDate,
 			@RequestParam(value = "maxDate", defaultValue = "") String maxDate, 
-			Pageable pageable ){
-		
-		return produtoServices.findProduto(minDate, maxDate, pageable);
-		
+			Pageable pageable ){		
+		return produtoServices.findProduto(minDate, maxDate, pageable);		
 	}
 	
 	@GetMapping("/{id}/notification")
