@@ -15,30 +15,26 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import curso.api.rest.spring1.model.Usuario;
 import curso.api.rest.spring1.repository.UsuarioRepository;
-import net.minidev.json.JSONObject;
+import curso.api.rest.spring1.utils.ValidationPostApiUtils;
 
-@RestController /* Arquitetura REST */
+@RestController 
 @RequestMapping(value = "/usuario")
 public class IndexController {
 
 	@Autowired
 	private UsuarioRepository usuarioRepository;
-
-	/* Deleta usuarios por id */
+	
 	@DeleteMapping(value = "/{id}", produces = "application/text")
 	public String deleteIDVenda(@PathVariable("id") Long id) {
 		usuarioRepository.deleteById(id);
 		return "OK Usuário deletado com SUCESSO !";
 	}
-
-	/* Método PUT para atualizar dados na API */
+	
 	@PutMapping(value = "/", produces = "application/json")
 	public ResponseEntity<Usuario> atualizar(@RequestBody Usuario usuario) {
-		/* Criar OUTRAS ROTINAS COMO VALIDAR DADOS ANTES DE SALVAR, ENVIAR EMAIL */
+		
 		Usuario usuarioSalvo = usuarioRepository.save(usuario);
 		return new ResponseEntity<Usuario>(usuarioSalvo, HttpStatus.OK);
 	}
@@ -48,45 +44,14 @@ public class IndexController {
 	public ResponseEntity passando2ParametrosOuMais(@PathVariable Long iduser, @PathVariable Long idvendas) {
 		//Usuario usuarioSalvo = usuarioRepository.save(usuario);
 		return new ResponseEntity("id user: " + iduser + " id vendas: " + idvendas, HttpStatus.OK);
-	} */
-
+	} */	
 	
-	
-	/* Salvando usuarios no banco */
 	@PostMapping(value = "/", produces = "application/json;charset=UTF-8", consumes = "application/json;charset=UTF-8")
-	public ResponseEntity<Object> cadastrar(@RequestBody String body) {
-		JSONObject mensagemJson = new JSONObject();
-		String mensagem;
-		
-		try {
-			JSONObject contingenciaRequest = new JSONObject();
-			ObjectMapper mapper = new ObjectMapper();
-			Usuario usuarioSalvo = mapper.readValue(contingenciaRequest.toString(), Usuario.class);
-			
-			if(usuarioSalvo == null || usuarioSalvo.getLogin() == null || usuarioSalvo.getNome() == null || usuarioSalvo.getSenha() == null ) {//
-				mensagemJson.put("ERRO", "Todos os campos são obrigatórios!");
-				return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(mensagemJson.toString()) ;
-			}
-			else {
-				mensagemJson.put("OK", "Usuario salvo com sucesso!");//usuarioRepository.save(body);
-				return ResponseEntity.status(HttpStatus.OK).body(mensagemJson.toString()) ;
-			}
-			
-		}catch (Exception e) {
-			mensagem = e.getMessage();
-			mensagemJson.put("erro", mensagem);
-			mensagemJson.put("stack_trace", e.getLocalizedMessage());
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(mensagemJson.toString());
-		}
-		
-		
-		
-	}
+	public ResponseEntity<Usuario> cadastrar(@RequestBody Usuario usuario) {		
+		Usuario usuarioSalvo = usuarioRepository.save(ValidationPostApiUtils.validate(usuario));
+		return new ResponseEntity<Usuario>(usuarioSalvo, HttpStatus.OK) ;
+	}	
 	
-	
-	
-
-	/* Retorna os usuarios por id */
 	@GetMapping(value = "/{id}/codigovenda/{venda}", produces = "application/json")
 	public ResponseEntity<Usuario> idVenda(@PathVariable(value = "id") Long id,
 			@PathVariable(value = "venda") Long venda) {
@@ -95,23 +60,22 @@ public class IndexController {
 		return new ResponseEntity<Usuario>(usuario.get(), HttpStatus.OK);
 	}
 
-	/* Retorna os usuarios por id */
+	
 	@GetMapping(value = "/{id}/relatoriopdf", produces = "application/json")
 	public ResponseEntity<Usuario> relatorio(@PathVariable(value = "id") Long id) {
 		Optional<Usuario> usuario = usuarioRepository.findById(id);
 		/* retorno seria um relatorio */
 		return new ResponseEntity<Usuario>(usuario.get(), HttpStatus.OK);
-
 	}
 
-	/* Retorna os usuarios por id */
+	
 	@GetMapping(value = "/{id}", produces = "application/json")
 	public ResponseEntity<Usuario> init(@PathVariable(value = "id") Long id) {
 		Optional<Usuario> usuario = usuarioRepository.findById(id);
 		return new ResponseEntity<Usuario>(usuario.get(), HttpStatus.OK);
 	}
 
-	/* Retorna todos usuarios */
+	
 	@GetMapping(value = "/", produces = "application/json")
 	public ResponseEntity<List<Usuario>> usuario() {
 		List<Usuario> list = (List<Usuario>) usuarioRepository.findAll();
