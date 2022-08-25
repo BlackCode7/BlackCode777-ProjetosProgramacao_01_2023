@@ -35,20 +35,24 @@ public class IndexController {
 	@PutMapping(value = "/", produces = "application/json")
 	public ResponseEntity<Usuario> atualizar(@RequestBody Usuario usuario) {
 		
-		Usuario usuarioSalvo = usuarioRepository.save(usuario);
+		/* Associando o telefone com o usuário */
+		for( int pos=0; pos < usuario.getTelefones().size(); pos++ ) {
+			usuario.getTelefones().get(pos).setUsuario(usuario);
+		}
+		
+		Usuario usuarioSalvo = usuarioRepository.save(ValidationPostApiUtils.validate(usuario));
 		return new ResponseEntity<Usuario>(usuarioSalvo, HttpStatus.OK);
-	}
-
-	/* Passando varios parametros com @PathVariable
-	@PostMapping(value = "/{iduser}/idvendas/{idvendas}", produces = "application/json")
-	public ResponseEntity passando2ParametrosOuMais(@PathVariable Long iduser, @PathVariable Long idvendas) {
-		//Usuario usuarioSalvo = usuarioRepository.save(usuario);
-		return new ResponseEntity("id user: " + iduser + " id vendas: " + idvendas, HttpStatus.OK);
-	} */	
+	}	
 	
 	@PostMapping(value = "/", produces = "application/json;charset=UTF-8", consumes = "application/json;charset=UTF-8")
-	public ResponseEntity<Usuario> cadastrar(@RequestBody Usuario usuario) {		
-		Usuario usuarioSalvo = usuarioRepository.save(ValidationPostApiUtils.validate(usuario));
+	public ResponseEntity<Usuario> cadastrar(@RequestBody Usuario usuario) {	
+		
+		/* Associando o telefone com o usuário */
+		for( int pos=0; pos < usuario.getTelefones().size(); pos++ ) {
+			usuario.getTelefones().get(pos).setUsuario(usuario);
+		}
+		
+		Usuario usuarioSalvo = usuarioRepository.save(usuario);			
 		return new ResponseEntity<Usuario>(usuarioSalvo, HttpStatus.OK) ;
 	}	
 	
@@ -83,6 +87,15 @@ public class IndexController {
 	}
 
 	/*
+	 * 
+
+		 Passando varios parametros com @PathVariable
+		@PostMapping(value = "/{iduser}/idvendas/{idvendas}", produces = "application/json")
+		public ResponseEntity passando2ParametrosOuMais(@PathVariable Long iduser, @PathVariable Long idvendas) {
+			//Usuario usuarioSalvo = usuarioRepository.save(usuario);
+			return new ResponseEntity("id user: " + iduser + " id vendas: " + idvendas, HttpStatus.OK);
+		} 
+	 * 
 	 * Retornando json na tela com dados do usuário em forma de lista
 	 * 
 	 * @GetMapping(value="/", produces="application/json") public

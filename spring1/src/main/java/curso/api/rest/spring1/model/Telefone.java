@@ -21,7 +21,7 @@ public class Telefone {
 	
 	@JsonIgnore
 	@org.hibernate.annotations.ForeignKey(name="usuario_id")
-	@ManyToOne /* Proporção de usuario para muitos telefones */
+	@ManyToOne(optional = false) /* Proporção de usuario para muitos telefones */
 	private Usuario usuario;
 
 	/* Getters and Setters */
