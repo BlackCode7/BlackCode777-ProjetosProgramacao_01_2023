@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,6 +20,9 @@ import curso.api.rest.spring1.model.Usuario;
 import curso.api.rest.spring1.repository.UsuarioRepository;
 import curso.api.rest.spring1.utils.ValidationPostApiUtils;
 
+//@CrossOrigin( origins = "*" ) // @CrossOrigin( origins = "*" ) / @CrossOrigin tudo Libera o bloqueio da aplicação
+//Eu poderia tb duplicar esse arquivo e dar acesso a outra URL de outro lugar ver o vídeo 33.33
+//@CrossOrigin( origins = "https://github.com/BlackCode7") //Especificando quais os sistemas podem acessar  a API de usuario
 @RestController 
 @RequestMapping(value = "/usuario")
 public class IndexController {

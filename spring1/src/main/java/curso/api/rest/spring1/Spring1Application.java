@@ -31,7 +31,7 @@ public class Spring1Application implements WebMvcConfigurer {
 	public void addCorsMappings(CorsRegistry registry) {
 		//WebMvcConfigurer.super.addCorsMappings(registry);
 		// registry.addMapping("/usuario/**").allowedMethods("POST","GET","PUT","DELETE")
-		registry.addMapping("//**")
+		registry.addMapping("/**")
 		.allowedMethods("*")
 		.allowedOrigins("*");
 		//.allowedOrigins("https://github.com/BlackCode7"); //Libera todos os methodos para o cliente blackcode
