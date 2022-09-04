@@ -4,29 +4,40 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table
 public class Usuario {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+	private int id;
 	private String nomeUsuario;
 	private String email;
 	private String endereco;
-	private Long salario;
-	public Usuario() {
+	private int salario;
+	
+	public Usuario() {}	
+	
+	public Usuario(Integer id, String nomeUsuario, String email, String endereco, int salario) {
 		super();
+		this.id = id;
+		this.nomeUsuario = nomeUsuario;
+		this.email = email;
+		this.endereco = endereco;
+		this.salario = salario;
 	}
+
 	@Override
 	public String toString() {
 		return "Usuario [id=" + id + ", nomeUsuario=" + nomeUsuario + ", email=" + email + ", endereco=" + endereco
 				+ ", salario=" + salario + "]";
 	}
-	public Long getId() {
+	public double getId() {
 		return id;
 	}
-	public void setId(Long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	public String getNomeUsuario() {
@@ -47,10 +58,10 @@ public class Usuario {
 	public void setEndereco(String endereco) {
 		this.endereco = endereco;
 	}
-	public Long getSalario() {
+	public double getSalario() {
 		return salario;
 	}
-	public void setSalario(Long salario) {
+	public void setSalario(int salario) {
 		this.salario = salario;
 	}
 

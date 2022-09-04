@@ -1,0 +1,24 @@
+O primeiro passo agora é criar o código que abre o arquivo Excel. A Figura 1 mostra um 
+exemplo do arquivo que será aberto. A primeira coluna do arquivo tem o nome de todos os 
+alunos da disciplina, a segunda, o RA dos alunos, a terceira as notas da primeira prova, a 
+quarta as notas da segunda prova e a quinta as medias dos alunos, que foi calculada pela 
+formula (Nota1 + Nota2) / 2.
+
+
+1º ) - criar uma planilha com todos os dados que vou usar
+2º ) - criar uma classe usuario com todos os dados que vou precisar
+3º ) - escrever um programa que leia 2 planilhas
+4º ) - pegar os dados da planilha e jogar em um banco de dados
+5º ) - 
+
+
+Versões antigas do excel
+ 
+1 ->>> Para versões antigas do Excel é utilizada a classe HSSFWorkbook e HSSFSheet
+
+Versões mais recentes de excel
+
+1 ->>> para arquivos das novas versões do Excel são utilizadas as classes XSSFWorkbook e XSSFSheet
+
+
+https://www.devmedia.com.br/apache-poi-manipulando-documentos-em-java/31778
