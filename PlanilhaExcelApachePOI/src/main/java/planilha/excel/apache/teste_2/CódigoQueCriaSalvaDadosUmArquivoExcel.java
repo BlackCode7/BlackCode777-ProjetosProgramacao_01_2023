@@ -60,7 +60,7 @@ public class CódigoQueCriaSalvaDadosUmArquivoExcel {
 			workbook.write(arquivoOut);
 			arquivoOut.close();
 			
-			File file = new File();
+			//File file = new File();
 			
 			System.out.println("Arquivo criado com sucesso!");
 		}catch (FileNotFoundException e) {
