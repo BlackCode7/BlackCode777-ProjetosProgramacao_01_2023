@@ -1,4 +1,4 @@
-package planilha.excel.apache.teste_2;
+package planilha.excel.apache.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
