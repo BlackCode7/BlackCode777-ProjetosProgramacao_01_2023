@@ -3,7 +3,7 @@ package planilha.excel.apache.teste_2;
 public class Usuario {
 	
 	private Long id;
-	private String nomeProduto;
+	private String nomeUsuario;
 	private String email;
 	private String endereco;
 	private Long salario;
@@ -12,7 +12,7 @@ public class Usuario {
 	}
 	@Override
 	public String toString() {
-		return "Usuario [id=" + id + ", nomeProduto=" + nomeProduto + ", email=" + email + ", endereco=" + endereco
+		return "Usuario [id=" + id + ", nomeUsuario=" + nomeUsuario + ", email=" + email + ", endereco=" + endereco
 				+ ", salario=" + salario + "]";
 	}
 	public Long getId() {
@@ -21,11 +21,11 @@ public class Usuario {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public String getNomeProduto() {
-		return nomeProduto;
+	public String getNomeUsuario() {
+		return nomeUsuario;
 	}
-	public void setNomeProduto(String nomeProduto) {
-		this.nomeProduto = nomeProduto;
+	public void setNomeUsuario(String nomeUsuario) {
+		this.nomeUsuario = nomeUsuario;
 	}
 	public String getEmail() {
 		return email;
@@ -45,6 +45,5 @@ public class Usuario {
 	public void setSalario(Long salario) {
 		this.salario = salario;
 	}
-	
 
 }
