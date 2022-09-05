@@ -15,7 +15,7 @@ import planilha.excel.apache.model.Usuario;
 
 public class CodeAbreLeDadosArquivoEXCEL {
 	
-	private static final String fileName = "E:\\Projetos_Programacao\\ProjetoSpringBoot-3\\targaryan_1.xls";
+	private static final String fileName = "C:\\Users\\Usuario\\Documents\\DocsExcelApachePOI\\targaryan_1.xls";
 
 	public static void main(String[] args) throws IOException {
 		ArrayList< Usuario > usuarioLista = new ArrayList<Usuario>();// lista que vai receber os dados dos usuarios 		
@@ -23,15 +23,10 @@ public class CodeAbreLeDadosArquivoEXCEL {
 		try {
 					
 			// para abrir o arquivo excel
-			FileInputStream arquivo = new FileInputStream( new File( CodeAbreLeDadosArquivoEXCEL.fileName ) );	
-			
-			//System.out.println(" se existe o arquivo ou não "+arquivo);
-			
+			FileInputStream arquivo = new FileInputStream( new File( CodeAbreLeDadosArquivoEXCEL.getFilename() ) );	
 			HSSFWorkbook workbook = new HSSFWorkbook(arquivo);//pega o arquivo			
-			HSSFSheet sheetUsuarios = workbook.getSheetAt(0);//pega o indice 0	
-			
-			//System.out.println(" se existe o arquivo ou não "+sheetUsuarios);
-			
+			HSSFSheet sheetUsuarios = workbook.getSheetAt(0);//pega o indice 0			
+						
 			Iterator<Row> rowIterator = sheetUsuarios.iterator(); //chama função Iterator()			
 			// Chama o laço de repetição while mas por der o for também
 			while ( rowIterator.hasNext() ) {//Iterando nas linhas do excel
@@ -71,6 +66,10 @@ public class CodeAbreLeDadosArquivoEXCEL {
 			System.out.println("Arquivo excel não encontrado!!!");			
 		}
 
+	}
+
+	public static String getFilename() {
+		return fileName;
 	}
 
 }
