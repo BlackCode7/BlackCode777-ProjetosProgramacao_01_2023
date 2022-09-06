@@ -1,34 +1,32 @@
 package planilha.excel.apache.teste_3;
 
-import java.io.File;
-import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
 
-import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.Row;
-
-import planilha.excel.apache.model.Usuario;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.util.WorkbookUtil;
 
 public class JuntandoVariasPlpanilhasEmUmaSO {
 	
-	public static final String fileName = "C:\\Users\\Usuario\\Documents\\DocsExcelApachePOI\\targaryan_1.xls";
+	public static final String fileName = "C:\\Users\\Usuario\\Documents\\DocsExcelApachePOI\\targaryan_1.xlsx";
 		
 	public static void main(String[] args) throws IOException {
 		
-		ArrayList< Usuario > usuarioLista = new ArrayList<Usuario>();
+		Workbook wb = new HSSFWorkbook();  // or new XSSFWorkbook();
+		Sheet sheet_1 = wb.createSheet("usuario_1");
+		Sheet sheet_2 = wb.createSheet("usuario_2");
+			
 		
-		FileInputStream arquivo = new FileInputStream( new File( JuntandoVariasPlpanilhasEmUmaSO.fileName ) );
+		//Criando nome da planillha
+		String safeName = WorkbookUtil.createSafeSheetName("['usuario_3'*?]");
 		
-		HSSFWorkbook workbook = new HSSFWorkbook(arquivo);
-		HSSFSheet sheetUsuarios = workbook.getSheetAt(0);
+		Sheet sheet_3 = wb.createSheet(safeName);
 		
-		for ( Row planilha: sheetUsuarios ) {
-			//System.out.println(planilha);
-		}
-		
-		System.out.println(sheetUsuarios);
+		FileOutputStream fileOutput = new FileOutputStream("UnionWorkBookExcel.xlsx");
+		wb.write(fileOutput);
+		fileOutput.close();
 		
 
 	}

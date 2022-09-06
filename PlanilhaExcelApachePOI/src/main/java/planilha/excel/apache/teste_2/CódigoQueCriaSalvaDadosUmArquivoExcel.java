@@ -24,19 +24,19 @@ public class CódigoQueCriaSalvaDadosUmArquivoExcel {
 		HSSFSheet sheetUsuarios = workbook.createSheet("Usuarios");
 		
 		List<Usuario> listusuarios = new ArrayList<Usuario>();
-		
+		/*
 		listusuarios.add( new Usuario(10, "Anderson", "Anderson@Anderson.com", "End_Anderson", 11122) );
 		listusuarios.add( new Usuario(20, "Andre", "Andre@Andre.com", "End_Andre", 11123) );
 		listusuarios.add( new Usuario(30, "Carlos", "Carlos@Carlos.com", "End_Carlos", 11124) );
 		listusuarios.add( new Usuario(40, "Simone", "Simone@Simone.com", "End_Simone", 11125) );
-				
+				*/
 		int rowNum = 0;//Criar o iterator para controlar as linhas do excel
 		
 		for( Usuario usuario: listusuarios ) {
 			Row row = sheetUsuarios.createRow(rowNum ++ );
 			
 			int cellNum = 0;//Percorrendo as colunas da planilha
-			
+			/*
 			Cell cellID = row.createCell(cellNum ++ );
 			cellID.setCellValue(usuario.getId());
 			
@@ -51,6 +51,7 @@ public class CódigoQueCriaSalvaDadosUmArquivoExcel {
 			
 			Cell cellSalario = row.createCell(cellNum ++ );
 			cellSalario.setCellValue(usuario.getSalario());
+			*/
 		}
 		
 		try {

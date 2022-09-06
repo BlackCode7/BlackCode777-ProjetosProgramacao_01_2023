@@ -33,12 +33,12 @@ public class Teste_3 {
 		//Carregando dados de usuarios
 		List<Usuario> lista = new ArrayList<Usuario>();
 		Usuario usuarios = new Usuario();
-		usuarios.setId(1);
+		/*usuarios.setId(1);
 		usuarios.setNomeUsuario("Coca");
 		usuarios.setEmail("Coca@coca.com");
 		usuarios.setEndereco("Endereco_1");
 		usuarios.setSalario(222);
-		lista.add(usuarios);
+		lista.add(usuarios);*/
 					
 		//Configurando estilos de células (Cores, alinhamento, formatação, etc..)
 		HSSFDataFormat numberFormat = workbook.createDataFormat();
@@ -80,13 +80,11 @@ public class Teste_3 {
 		
 		// Adicionando os dados dos usuários na planilha
 		for ( Usuario usuario: lista ) {
-			System.out.println(usuario);
-			row = sheet.createRow(rownum ++);
-			System.out.println(row);
-			
+
+			row = sheet.createRow(rownum ++);			
 			
 			cellnum = 0;
-			
+			/*
 			cell = row.createCell(cellnum ++);
 			cell.setCellStyle(numberStyle);
 			cell.setCellValue(usuario.getId()); //campo id
@@ -101,7 +99,8 @@ public class Teste_3 {
 			cell.setCellValue(usuario.getEndereco());//campo endereço
 			cell = row.createCell(cellnum ++);
 			cell.setCellStyle(numberStyle);
-			cell.setCellValue(usuario.getSalario());//campo salário   
+			cell.setCellValue(usuario.getSalario());//campo salário 
+			*/  
 		}
 		
 		try {

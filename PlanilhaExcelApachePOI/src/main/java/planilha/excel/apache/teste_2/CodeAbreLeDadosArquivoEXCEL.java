@@ -35,7 +35,7 @@ public class CodeAbreLeDadosArquivoEXCEL {
 				Usuario usuario = new Usuario();//instanciando o objeto Usuario
 				usuarioLista.add(usuario);//Adicionaod na lista de usuario o objeto Usuario instanciado				
 				while( cellIterator.hasNext() ) { //iterando nas colunas da planilha
-					
+					/*
 					Cell cell = cellIterator.next();//chamando a sempre a próxima celular para formar a coluna					
 					switch (cell.getColumnIndex()) {//pegando o index das colunas					
 					case 0:
@@ -56,6 +56,7 @@ public class CodeAbreLeDadosArquivoEXCEL {
 					default:
 						break;
 					}
+					*/
 				}
 			}
 			
