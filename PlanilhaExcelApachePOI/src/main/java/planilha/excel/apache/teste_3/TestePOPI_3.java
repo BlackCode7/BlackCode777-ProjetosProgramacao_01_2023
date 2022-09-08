@@ -29,28 +29,28 @@ public class TestePOPI_3 {
 			Sheet sheet2 = workbook.getSheetAt(1);
 			
 			Iterator<Row> rowIterator1 = sheet1.iterator();			
-			Iterator<Row> rowIterator2 = sheet2.iterator();
+			Iterator<Row> rowIterator2 = sheet2.iterator();			
 			
-			
-			while( rowIterator1.hasNext() ) {
+			while( rowIterator1.hasNext() || rowIterator2.hasNext() ) {
 				Row currentRow1 = rowIterator1.next();
 				Row currentRow2 = rowIterator2.next();
 				
 				Iterator<Cell> cellIterator1 = currentRow1.iterator();
-				Iterator<Cell> cellIterator2 = currentRow2.iterator();
+				Iterator<Cell> cellIterator2 = currentRow2.iterator();				
 				
+				//System.out.println(" celula 1 >> "+cellIterator1);
 				
-				System.out.println(" celula 1 >> "+cellIterator1);
-				
-				while( cellIterator1.hasNext() ) {
+				while( cellIterator1.hasNext() || cellIterator2.hasNext()) {
 					Cell currentCell1 = cellIterator1.next();					
 					Cell currentCell2 = cellIterator2.next();
 					
-					System.out.println(" celula 2 >> "+cellIterator1);
+					//System.out.println(" celula 2 >> "+cellIterator1);
 					
 					/* logica para comparar os valores */
 				}
 			}
+			
+			/* SALVAR ARQUIVO AQUI */
 			
 		} catch (Exception erro) {
 			erro.printStackTrace();

@@ -28,6 +28,8 @@ public class FindCodeWithMergedSheetInEXCELBook {
 			book2 = new HSSFWorkbook(new FileInputStream("C:\\Users\\Usuario\\Documents\\DocsExcelApachePOI\\targaryan_2.xls"));
 			sheet2 = book2.getSheetAt(0);
 			
+			System.out.println(sheet1.equals(sheet2));
+			
 			try {
 				
 				AdvancedWorkbook mergedBook = new AdvancedWorkbook();
