@@ -11,8 +11,7 @@ import curso.api.rest.spring1.model.Usuario;
 import curso.api.rest.spring1.repository.UsuarioRepository;
 
 @Service
-public class ImplementacaoUserDetailsService implements UserDetailsService{
-	
+public class ImplementacaoUserDetailsService implements UserDetailsService{	
 	
 	@Autowired
 	private UsuarioRepository usuarioRepository; 

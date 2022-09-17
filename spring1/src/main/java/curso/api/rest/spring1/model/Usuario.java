@@ -38,26 +38,17 @@ public class Usuario implements UserDetails{
 	
 	@OneToMany(mappedBy="usuario", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Telefone> telefones = new ArrayList<Telefone>();
-	
-	
+		
 	
 	@OneToMany(fetch = FetchType.EAGER)/* Um usuario para varios papeis */
-	@JoinTable( name="usuarios_role", uniqueConstraints = @UniqueConstraint (
-			
-			columnNames = {"usuario_id", "role_id"}, name = "unique_role_user"),
-	
-			joinColumns = @JoinColumn(name="usuario_id", referencedColumnName = "id", table = "usuario", unique = false,
-			
-			foreignKey = @ForeignKey(name = "usuario_fk", value = ConstraintMode.CONSTRAINT)), 
-			
-	inverseJoinColumns = @JoinColumn(name="role_id", referencedColumnName = "id", table = "role", unique = false, updatable=false,
-	
+	@JoinTable( name="usuarios_role", uniqueConstraints = @UniqueConstraint (			
+			columnNames = {"usuario_id", "role_id"}, name = "unique_role_user"),	
+			joinColumns = @JoinColumn(name="usuario_id", referencedColumnName = "id", table = "usuario", unique = false,			
+			foreignKey = @ForeignKey(name = "usuario_fk", value = ConstraintMode.CONSTRAINT)), 			
+	inverseJoinColumns = @JoinColumn(name="role_id", referencedColumnName = "id", table = "role", unique = false, updatable=false,	
 	foreignKey = @ForeignKey( name = "role_fk", value = ConstraintMode.CONSTRAINT ) ) )
 	private List<Role> roles; /* instanciando uma lista de roles */
-	
-	
-	
-	
+		
 	
 	public List<Telefone> getTelefones() {
 		return telefones;

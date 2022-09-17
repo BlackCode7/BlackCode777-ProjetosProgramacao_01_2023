@@ -37,13 +37,11 @@ public class IndexController {
 	}
 	
 	@PutMapping(value = "/", produces = "application/json")
-	public ResponseEntity<Usuario> atualizar(@RequestBody Usuario usuario) {
-		
+	public ResponseEntity<Usuario> atualizar(@RequestBody Usuario usuario) {		
 		/* Associando o telefone com o usuário */
 		for( int pos=0; pos < usuario.getTelefones().size(); pos++ ) {
 			usuario.getTelefones().get(pos).setUsuario(usuario);
-		}
-		
+		}		
 		Usuario usuarioSalvo = usuarioRepository.save(ValidationPostApiUtils.validate(usuario));
 		return new ResponseEntity<Usuario>(usuarioSalvo, HttpStatus.OK);
 	}	
