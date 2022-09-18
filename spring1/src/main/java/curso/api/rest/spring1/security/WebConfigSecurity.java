@@ -1,12 +1,16 @@
 package curso.api.rest.spring1.security;
 
+import javax.servlet.Filter;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
@@ -28,14 +32,16 @@ public class WebConfigSecurity extends WebSecurityConfigurerAdapter{
 		//URL de logout
 		.anyRequest().authenticated().and().logout().logoutSuccessUrl("/logout")
 		//Mapeia URL de logout e invalida o usuario
-		.logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
+		.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 		
 		/*Filtra requisição de login para autenticação*/
+		.and().addFilterBefore(new JWTLoginFilter("/login", authenticationManager()), 
+											UsernamePasswordAuthenticationFilter.class)
+		
 		/*Filtra as demais requisições para verificar a presença do  TOKEN JWT no HEADER HTTP */
-	}
-	
-	
-	
+		 .addFilterBefore(new JwtAutenticacaoFilter(), 
+											UsernamePasswordAuthenticationFilter.class);
+	}	
 
 	@Autowired
 	private ImplementacaoUserDetailsService implementacaoUserDetailsService;

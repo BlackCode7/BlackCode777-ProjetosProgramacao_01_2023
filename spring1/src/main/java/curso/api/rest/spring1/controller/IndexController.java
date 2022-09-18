@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,6 +43,14 @@ public class IndexController {
 		for( int pos=0; pos < usuario.getTelefones().size(); pos++ ) {
 			usuario.getTelefones().get(pos).setUsuario(usuario);
 		}		
+		
+		// Atualizando usuario sem atualizar a senha criptografada
+		Usuario userTemp = usuarioRepository.findUserByLogin(usuario.getLogin());
+		if(!userTemp.getSenha().equals(usuario.getSenha())) { // Se for senhas diferentes
+			String senhaCripto = new BCryptPasswordEncoder().encode(usuario.getSenha());
+			usuario.setSenha(senhaCripto);
+		}
+		
 		Usuario usuarioSalvo = usuarioRepository.save(ValidationPostApiUtils.validate(usuario));
 		return new ResponseEntity<Usuario>(usuarioSalvo, HttpStatus.OK);
 	}	
@@ -54,7 +63,11 @@ public class IndexController {
 			usuario.getTelefones().get(pos).setUsuario(usuario);
 		}
 		
-		Usuario usuarioSalvo = usuarioRepository.save(usuario);			
+		/* Gerando uma senha criptografada para cada usuario */
+		String senhaCripto = new BCryptPasswordEncoder().encode(usuario.getSenha());
+		usuario.setSenha(senhaCripto);
+		Usuario usuarioSalvo = usuarioRepository.save(usuario);	
+		
 		return new ResponseEntity<Usuario>(usuarioSalvo, HttpStatus.OK) ;
 	}	
 	

@@ -20,24 +20,25 @@ import curso.api.rest.spring1.model.Usuario;
 
 // Estabelece o gerenciador de token
 public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
+	
+	/* ***************** AULA 33.45 ****************** */
 
 	protected JWTLoginFilter( String url, AuthenticationManager authenticationManager) {
 		super( new AntPathRequestMatcher(url) );
 		setAuthenticationManager(authenticationManager);
 	}  
-		
-	@Override
-	protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
-		super.successfulAuthentication(request, response, chain, authResult);
-		//new JWTTokenAutenticacaoService().addAuthentication(response, authResult.getName());
-	}
-
-	/* ***************** AULA 33.45 ****************** */
 	
-
 	@Override
 	public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
-			throws AuthenticationException, IOException, ServletException {
-		// TODO Auto-generated method stub
-		return null;
-	}}
+			throws AuthenticationException, IOException, ServletException {		
+		Usuario user = new ObjectMapper().readValue(request.getInputStream(), Usuario.class);		
+		return getAuthenticationManager().authenticate(new UsernamePasswordAuthenticationToken(user.getLogin(), user.getSenha()));
+	}
+	
+	@Override
+	protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain,
+			Authentication authResult) throws IOException {
+		new JWTTokenAutenticacaoService().addAuthentication(response, authResult.getName());
+	}
+		
+}

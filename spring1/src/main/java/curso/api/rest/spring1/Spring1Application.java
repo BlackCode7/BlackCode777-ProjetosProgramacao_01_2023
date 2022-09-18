@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
@@ -24,6 +25,7 @@ public class Spring1Application implements WebMvcConfigurer {
 
 	public static void main(String[] args) {
 		SpringApplication.run(Spring1Application.class, args);
+		System.out.println(" encriptação >>>  "+new BCryptPasswordEncoder().encode("1231212"));
 	}
 	
 	/* Configuração de cross origin */
@@ -32,7 +34,8 @@ public class Spring1Application implements WebMvcConfigurer {
 		//WebMvcConfigurer.super.addCorsMappings(registry);
 		// registry.addMapping("/usuario/**").allowedMethods("POST","GET","PUT","DELETE")
 		registry.addMapping("/usuario/**") /* liberando somente o usuário */
-		.allowedMethods("POST","GET","PUT","DELETE") /* liberando todos os métodos para o serviço de usuário */
+		.allowedMethods("*")
+		//.allowedMethods("POST","GET","PUT","DELETE") /* liberando todos os métodos para o serviço de usuário */
 		.allowedOrigins("*");
 		//.allowedOrigins("https://github.com/BlackCode7"); //Libera todos os methodos para o cliente blackcode
 	}
