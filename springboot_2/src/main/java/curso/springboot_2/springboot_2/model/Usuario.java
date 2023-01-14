@@ -1,3 +1,4 @@
+
 package curso.springboot_2.springboot_2.model;
 
 import java.util.ArrayList;
@@ -19,6 +20,8 @@ import org.hibernate.annotations.ForeignKey;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+@ToString
+@EqualsAndHashCode
 @Entity
 public class Usuario  implements UserDetails {
 	
